@@ -1,0 +1,32 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: graph-project
+      POSTGRES_DB: graph-project
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-graph-project-data:/var/lib/postgresql/data
+    networks:
+      - graph-project
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com.br
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: unless-stopped
+    ports:
+      - 16543:80
+    depends_on:
+      - postgres
+    networks:
+      - graph-project
+volumes:
+  postgres-simple_chat-data:
+    driver: local
+networks:
+  graph-project:
