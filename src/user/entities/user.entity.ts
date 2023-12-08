@@ -12,4 +12,7 @@ export class User {
   @Field()
   @Column('text', { nullable: false })
   email: string;
+  @Field()
+  @Column('text', { nullable: false })
+  password: string;
 }
